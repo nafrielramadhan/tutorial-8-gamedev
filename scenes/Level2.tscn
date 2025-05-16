@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cee8obd3lpooy"]
+[gd_scene load_steps=22 format=4 uid="uid://cee8obd3lpooy"]
 
 [ext_resource type="Script" path="res://scripts/spawner.gd" id="1_lqyuo"]
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/Player.tscn" id="1_qstoe"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://r2w1ecbhafo0" path="res://scenes/fire.tscn" id="12_0bali"]
 [ext_resource type="PackedScene" uid="uid://cneiuec24r70n" path="res://scenes/LifeCounter.tscn" id="13_v33pc"]
 [ext_resource type="PackedScene" uid="uid://d3vovdgenig7e" path="res://scenes/CoinCounter.tscn" id="14_2wqdv"]
+[ext_resource type="PackedScene" uid="uid://bj4gj82b6egue" path="res://scenes/Spawner8.tscn" id="15_e4fdm"]
+[ext_resource type="Script" path="res://scenes/spawner_82.gd" id="16_gh01b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87c7u"]
 texture = ExtResource("2_xn8y2")
@@ -101,6 +103,18 @@ physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_20sqa")
 sources/0 = SubResource("TileSetAtlasSource_87c7u")
 
+[sub_resource type="CurveTexture" id="CurveTexture_4w4sa"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g8tlv"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1400, 40, 1)
+spread = 40.0
+gravity = Vector3(-120, 120, 0)
+scale_max = 10.0
+color = Color(0.86029, 0.888853, 0.891431, 1)
+alpha_curve = SubResource("CurveTexture_4w4sa")
+
 [node name="Level2" type="Node2D"]
 
 [node name="Spawner" type="Node2D" parent="."]
@@ -113,7 +127,7 @@ position = Vector2(-1370, 650)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(0, -2)
-tile_map_data = PackedByteArray("AAABAAEAAAADAAAAAAACAAEAAAAEAAAAAAAGAAIAAAADAAAAAAAHAAIAAAAEAAAAAAAJAAIAAAAGAAEAAAAKAAIAAAAHAAEAAAALAAEAAAAFAAEAAAALAAIAAAAIAAAAAAAMAAEAAAAHAAEAAAANAAEAAAAGAAAAAAAEAP//AAAAAAEAAAADAAAAAAAAAAEAAAAFAAAAAAAAAAEAAAAAAAIAAAAAAAEAAAD//wMAAAAAAAEAAAD8/wQAAAAFAAEAAAD7/wUAAAAFAAEAAAD8/wUAAAAIAAAAAAD9/wQAAAAGAAAAAAD6/wYAAAAHAAEAAAD5/wYAAAAHAAEAAAD4/wYAAAAHAAEAAAD3/wYAAAAHAAEAAAD2/wYAAAAHAAEAAAD7/wYAAAAIAAAAAAD8/wYAAAABAAAAAAAPAAIAAAAAAAEAAAASAAIAAAAHAAEAAAARAAIAAAAFAAAAAAASAAMAAAABAAAAAAASAAQAAAABAAAAAAASAAUAAAABAAAAAAAUAAIAAAABAAAAAAAUAAMAAAABAAAAAAAUAAQAAAABAAAAAAAUAP//AAAHAAEAAAAUAAAAAAABAAAAAAAUAAEAAAABAAAAAAASAAYAAAABAAAAAAAVAAQAAAAHAAEAAAAWAAQAAAAHAAEAAAASAAcAAAABAAAAAAAUAAwAAAAHAAEAAAAVAAwAAAAHAAEAAAAWAAwAAAAHAAEAAAAXAAwAAAAHAAEAAAAYAAwAAAAHAAEAAAAZAAwAAAAHAAEAAAAaAAwAAAAHAAEAAAAbAAwAAAAHAAEAAAAcAAwAAAABAAAAAAAcAAgAAAABAAAAAAAcAAkAAAABAAAAAAAcAAoAAAABAAAAAAAcAAsAAAABAAAAAAAcAAcAAAABAAAAAAATAAcAAAAHAAEAAAAUAAcAAAAHAAEAAAAVAAcAAAAHAAEAAAAWAAcAAAAHAAEAAAAXAAcAAAAHAAEAAAAYAAcAAAAHAAEAAAAcAAUAAAABAAAAAAAcAAYAAAABAAAAAAAcAAQAAAAHAAEAAAAbAAQAAAAHAAEAAAAaAAQAAAAHAAEAAAAZAAQAAAAHAAEAAAAYAAQAAAAHAAEAAAAXAAQAAAAHAAEAAAAXAAoAAAAAAAEAAAAZAAkAAAAAAAEAAAAbAAoAAAAAAAEAAAD1/wYAAAAFAAAAAAATAAwAAAAFAAAAAAAZAAcAAAAGAAAAAAA=")
+tile_map_data = PackedByteArray("AAABAAEAAAADAAAAAAACAAEAAAAEAAAAAAAGAAIAAAADAAAAAAAKAAIAAAAHAAEAAAAEAP//AAAAAAEAAAADAAAAAAAAAAEAAAAFAAAAAAAAAAEAAAAAAAIAAAAAAAEAAAD//wMAAAAAAAEAAAD8/wQAAAAFAAEAAAD7/wUAAAAFAAEAAAD8/wUAAAAIAAAAAAD9/wQAAAAGAAAAAAD6/wYAAAAHAAEAAAD5/wYAAAAHAAEAAAD4/wYAAAAHAAEAAAD3/wYAAAAHAAEAAAD2/wYAAAAHAAEAAAD7/wYAAAAIAAAAAAD8/wYAAAABAAAAAAAPAAIAAAAAAAEAAAASAAIAAAAHAAEAAAARAAIAAAAFAAAAAAASAAMAAAABAAAAAAASAAQAAAABAAAAAAASAAUAAAABAAAAAAAUAAIAAAABAAAAAAAUAAMAAAABAAAAAAAUAAQAAAABAAAAAAAUAP//AAAHAAEAAAAUAAAAAAABAAAAAAAUAAEAAAABAAAAAAASAAYAAAABAAAAAAAVAAQAAAAHAAEAAAAWAAQAAAAHAAEAAAASAAcAAAABAAAAAAAUAAwAAAAHAAEAAAAVAAwAAAAHAAEAAAAWAAwAAAAHAAEAAAAXAAwAAAAHAAEAAAAYAAwAAAAHAAEAAAAZAAwAAAAHAAEAAAAaAAwAAAAHAAEAAAAbAAwAAAAHAAEAAAAcAAwAAAABAAAAAAAcAAgAAAABAAAAAAAcAAkAAAABAAAAAAAcAAoAAAABAAAAAAAcAAsAAAABAAAAAAAcAAcAAAABAAAAAAATAAcAAAAHAAEAAAAUAAcAAAAHAAEAAAAVAAcAAAAHAAEAAAAWAAcAAAAHAAEAAAAXAAcAAAAHAAEAAAAYAAcAAAAHAAEAAAAcAAUAAAABAAAAAAAcAAYAAAABAAAAAAAcAAQAAAAHAAEAAAAbAAQAAAAHAAEAAAAaAAQAAAAHAAEAAAAZAAQAAAAHAAEAAAAYAAQAAAAHAAEAAAAXAAQAAAAHAAEAAAAXAAoAAAAAAAEAAAAZAAkAAAAAAAEAAAAbAAoAAAAAAAEAAAD1/wYAAAAFAAAAAAATAAwAAAAFAAAAAAAZAAcAAAAGAAAAAAAHAAIAAAAHAAEAAAAIAAIAAAAHAAEAAAALAAIAAAAHAAEAAAAMAAIAAAAHAAEAAAANAAIAAAAEAAAAAAAJAAIAAAAHAAEAAAA=")
 tile_set = SubResource("TileSet_cejtv")
 
 [node name="Coin" parent="." instance=ExtResource("5_0ae3c")]
@@ -133,9 +147,6 @@ position = Vector2(831, 30)
 
 [node name="Coin6" parent="." instance=ExtResource("5_0ae3c")]
 position = Vector2(1080, 118)
-
-[node name="BeeEnemy3" parent="." instance=ExtResource("4_nin0a")]
-position = Vector2(1886, 74)
 
 [node name="Coin7" parent="." instance=ExtResource("5_0ae3c")]
 position = Vector2(2743, 763)
@@ -212,7 +223,7 @@ autoplay = true
 max_distance = 5000.0
 
 [node name="Fire" parent="." instance=ExtResource("12_0bali")]
-position = Vector2(1331, 191)
+position = Vector2(1983, 192)
 scale = Vector2(1.28, 1.28)
 sceneName = "Level2"
 
@@ -230,3 +241,17 @@ sceneName = "Level2"
 [node name="GUI" parent="CanvasLayer" instance=ExtResource("13_v33pc")]
 
 [node name="CoinCounter" parent="CanvasLayer" instance=ExtResource("14_2wqdv")]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(1603, -570)
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_g8tlv")
+lifetime = 6.0
+visibility_rect = Rect2(-3000, 0, 4100, 1500)
+trail_enabled = true
+trail_lifetime = 0.07
+
+[node name="Spawner8" parent="." instance=ExtResource("15_e4fdm")]
+position = Vector2(1775, 181)
+script = ExtResource("16_gh01b")
+spawn_rate = 2.0

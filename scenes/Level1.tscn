@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=4 uid="uid://yqmk0vpvnyxr"]
+[gd_scene load_steps=17 format=4 uid="uid://yqmk0vpvnyxr"]
 
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/Player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bj4gj82b6egue" path="res://scenes/Spawner8.tscn" id="1_5ysmn"]
 [ext_resource type="Texture2D" uid="uid://76hi8rt1miuo" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_gr_grass.png" id="2_tvld2"]
 [ext_resource type="PackedScene" uid="uid://4y8egpi2trnr" path="res://scenes/AreaTrigger.tscn" id="4_e5hqp"]
 [ext_resource type="Texture2D" uid="uid://dtad60h2i1bp2" path="res://assets/assetsTutor5/kenney_planets/Planets/planet01.png" id="4_ei1fj"]
@@ -9,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://clbvvq0h20t2s" path="res://scenes/FallingFish.tscn" id="6_grabg"]
 [ext_resource type="PackedScene" uid="uid://d0h88njsdrvbf" path="res://scenes/coin.tscn" id="7_pxk6n"]
 [ext_resource type="AudioStream" uid="uid://q6p8t72xiqoc" path="res://assets/assetsTutor5/sounds/698375__sieuamthanh__happy-8bit-pixel-adenture-30.wav" id="8_505vg"]
-[ext_resource type="PackedScene" uid="uid://r2w1ecbhafo0" path="res://scenes/fire.tscn" id="9_vc2nw"]
 [ext_resource type="PackedScene" uid="uid://d3vovdgenig7e" path="res://scenes/CoinCounter.tscn" id="10_msjq0"]
 [ext_resource type="PackedScene" uid="uid://cneiuec24r70n" path="res://scenes/LifeCounter.tscn" id="10_s73tl"]
 
@@ -58,7 +58,23 @@ tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_u7l7f")
 
+[sub_resource type="CurveTexture" id="CurveTexture_0shyr"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wlfds"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1400, 40, 1)
+spread = 40.0
+gravity = Vector3(-120, 120, 0)
+scale_max = 10.0
+color = Color(0.254902, 0.898039, 1, 1)
+alpha_curve = SubResource("CurveTexture_0shyr")
+
 [node name="Level1" type="Node2D"]
+
+[node name="Spawner8" parent="." instance=ExtResource("1_5ysmn")]
+position = Vector2(2033, -89)
+spawn_rate = 2.0
 
 [node name="Player" parent="." instance=ExtResource("1")]
 position = Vector2(-470, 410)
@@ -67,7 +83,7 @@ collision_mask = 3
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-130, 120.5)
-tile_map_data = PackedByteArray("AAD+/wMAAAAHAAEAAAD//wMAAAAHAAEAAAAAAAIAAAAFAAEAAAABAAIAAAAHAAEAAAAAAAMAAAAIAAAAAAAEAAAAAAAAAAEAAAAFAP//AAAAAAEAAAAHAP//AAADAAAAAAD9/wMAAAAFAAAAAAACAAIAAAAGAAAAAAABAAMAAAABAAAAAAADAAEAAAAAAAEAAAAMAP7/AAADAAAAAAANAP7/AAAHAAEAAAAOAP7/AAAHAAEAAAAPAP7/AAAHAAEAAAAQAP7/AAAEAAAAAAAKAP//AAAEAAAAAAAIAP//AAAHAAEAAAAJAP//AAAHAAEAAAA=")
+tile_map_data = PackedByteArray("AAD+/wMAAAAHAAEAAAD//wMAAAAHAAEAAAAAAAIAAAAFAAEAAAABAAIAAAAHAAEAAAAAAAMAAAAIAAAAAAAEAAAAAAAAAAEAAAAFAP//AAAAAAEAAAAHAP//AAADAAAAAAD9/wMAAAAFAAAAAAACAAIAAAAGAAAAAAABAAMAAAABAAAAAAADAAEAAAAAAAEAAAAIAP//AAAHAAEAAAAJAP//AAAHAAEAAAAKAP//AAAHAAEAAAALAP//AAAHAAEAAAAMAP//AAAHAAEAAAANAP//AAAHAAEAAAAOAP//AAAHAAEAAAAPAP//AAAHAAEAAAAQAP//AAAEAAAAAAA=")
 tile_set = SubResource("TileSet_fifnm")
 
 [node name="Area Trigger2" parent="." instance=ExtResource("4_e5hqp")]
@@ -76,7 +92,7 @@ scale = Vector2(148.374, 2.51255)
 sceneName = "Level1"
 
 [node name="PlanetLevel2" type="Sprite2D" parent="."]
-position = Vector2(1978, -514)
+position = Vector2(2206, -344)
 scale = Vector2(0.406543, 0.406543)
 texture = ExtResource("4_ei1fj")
 
@@ -112,13 +128,17 @@ volume_db = 2.0
 autoplay = true
 max_distance = 3000.0
 
-[node name="Fire" parent="." instance=ExtResource("9_vc2nw")]
-position = Vector2(1025, -64)
-scale = Vector2(1.16, 1.16)
-sceneName = "Level1"
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="CoinCounter" parent="CanvasLayer" instance=ExtResource("10_msjq0")]
 
 [node name="LifeCounter" parent="CanvasLayer" instance=ExtResource("10_s73tl")]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(1925, -884)
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_wlfds")
+lifetime = 6.0
+visibility_rect = Rect2(-3000, 0, 3500, 1500)
+trail_enabled = true
+trail_lifetime = 0.07
