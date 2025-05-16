@@ -1,8 +1,6 @@
 # Planet Adventure! - Tutorial 8: Game Polishing & Balancing
 Tutorial ini merupakan lanjutan dari **Tutorial 6**
 
----
-
 ## 🎮 Fitur yang Ditambahkan
 
 ###  Membuat Partikel Hujan & Salju
